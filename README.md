@@ -32,10 +32,42 @@ Run using:
 
 ## Test Cases Demonstrated
 
-1. Clean Valid Frame
-2. Timeout Mid-Frame and Recovery
-3. Two Valid Frames Back-to-Back
-4. Timeout Disabled
+Test Cases Implemented
+Test 1 – Clean Valid Frame
+
+Frame:
+
+AA 01 03 10 20 30 02
+
+Expected Result:
+
+FRAME OK
+CMD = 0x01
+LEN = 3
+PAYLOAD = [10 20 30]
+
+Test 2 – Timeout Mid-Frame and Recovery
+
+Frame reception is interrupted by a timeout.
+
+Expected Result:
+
+Timeout detected
+Parser reset
+Recovery frame successfully parsed
+Test 3 – Two Valid Frames Back-to-Back
+
+Expected Result:
+
+Frame 1 parsed successfully
+Frame 2 parsed successfully
+Test 4 – Timeout Disabled
+
+Expected Result:
+
+No timeout occurs
+Corrupted partial frame eventually fails checksum validation
+Parser resets and waits for next SOF
 
 ## Notes
 
